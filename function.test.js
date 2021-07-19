@@ -41,7 +41,7 @@ beforeEach(() => {
     const data = JSON.parse(req.body.toString());
 
     expect(data.characters.length).toBe(6);
-    
+
     for (let i = 0; i < 6; i++) {
       expect(data.characters[i].length).toBe(22);
     }

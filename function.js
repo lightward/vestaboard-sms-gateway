@@ -76,7 +76,7 @@ const characterToCode = character => {
   let code = Object.keys(characterMapping).find(code => (
     characterMapping[code].indexOf(character.toUpperCase()) !== -1
   ));
-  
+
   if (code) {
     return parseInt(code, 10);
   } else {
