@@ -1,0 +1,22 @@
+{
+  "name": "vestaboard-sms-gateway",
+  "version": "0.0.0",
+  "description": "",
+  "main": "function.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "center-align": "^1.0.1",
+    "lodash": "^4.17.21",
+    "node-fetch": "^2.6.1",
+    "smartwrap": "^2.0.2",
+    "twilio": "^3.66.0"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6",
+    "jest-fetch-mock": "^3.0.3"
+  }
+}
