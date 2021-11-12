@@ -1,5 +1,4 @@
 const fetch = require('node-fetch');
-const centerAlign = require('center-align');
 const smartwrap = require('smartwrap');
 const _ = require('lodash');
 
@@ -84,39 +83,61 @@ const characterToCode = character => {
   }
 };
 
-const centerArray = (arr) => {
-  const len = 22;
-  const head = Array(Math.floor((len - arr.length)/2)).fill(null);
-  const tail = Array(Math.ceil((len - arr.length)/2)).fill(null);
+const alignLine = (arr) => {
+  const length = 22;
+  let headLength, tailLength;
 
-  arr.unshift(...head);
-  arr.push(...tail);
+  if (Math.random() > 0.5) {
+    headLength = Math.floor((length - arr.length)/2);
+    tailLength = Math.ceil((length - arr.length)/2);
+  } else if(Math.random() > 0.5) {
+    headLength = length - arr.length - head.length;
+    tailLength = (arr.length + 1) < 0 ? 1 : 1;
+  } else {
+    headLength = (arr.length + 1) < 0 ? 1 : 1;
+    tailLength = length - arr.length - head.length;
+  }
+
+  console.log(headLength, tailLength, arr.length);
+
+  arr.unshift(...Array(headLength).fill(null));
+  arr.push(...Array(tailLength).fill(null));
 };
 
-const makeNullLine = () => [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
+const makeNullLine = () => Array.from({length: 22}, () => null);
 
-const centerAll = (characters) => {
-  characters.forEach(centerArray);
+const alignAll = (characters) => {
+  if (Math.random() > 0.5) {
+    characters.forEach(alignLine);
 
-  if (characters.length === 1) {
-    characters.unshift(makeNullLine(), makeNullLine());
-    characters.push(makeNullLine(), makeNullLine(), makeNullLine());
-  } else if(characters.length === 2) {
-    characters.unshift(makeNullLine(), makeNullLine());
-    characters.push(makeNullLine(), makeNullLine());
-  } else if(characters.length === 3) {
-    characters.unshift(makeNullLine());
-    characters.push(makeNullLine(), makeNullLine());
-  } else if(characters.length === 4) {
-    characters.unshift(makeNullLine());
-    characters.push(makeNullLine());
-  } else if(characters.length === 5) {
-    characters.push(makeNullLine());
+    if (characters.length === 1) {
+      characters.unshift(makeNullLine(), makeNullLine());
+      characters.push(makeNullLine(), makeNullLine(), makeNullLine());
+    } else if(characters.length === 2) {
+      characters.unshift(makeNullLine(), makeNullLine());
+      characters.push(makeNullLine(), makeNullLine());
+    } else if(characters.length === 3) {
+      characters.unshift(makeNullLine());
+      characters.push(makeNullLine(), makeNullLine());
+    } else if(characters.length === 4) {
+      characters.unshift(makeNullLine());
+      characters.push(makeNullLine());
+    } else if(characters.length === 5) {
+      characters.push(makeNullLine());
+    }
+  } else if(Math.random() > 0.5) {
+    for (; characters.length < 6;) {
+      characters.unshift(makeNullLine());
+    }
+  } else if(Math.random() > 0.5) {
+    for (; characters.length < 6;) {
+      characters.push(makeNullLine());
+    }
   }
 };
 
 const applyCharacterCanvas = (characters, hint) => {
-  centerAll(characters);
+  alignAll(characters);
 
   let canvas;
 
